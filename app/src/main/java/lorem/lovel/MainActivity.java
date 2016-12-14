@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,23 +27,16 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mBigCountryA;
     private LinearLayoutManager mBigCountryLM;
 
-    private RecyclerView mCountryRV;
-    private RecyclerView.Adapter mCountryA;
-    private LinearLayoutManager mCountryLM;
-
-    private RecyclerView mEventRV;
-    private RecyclerView.Adapter mEventA;
-    private LinearLayoutManager mEventLM;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/NeueHaasGrotDisp-Roman.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
 
-        setContentView(R.layout.activity_main);
 
         mBigCountryRV = (RecyclerView) findViewById(R.id.Home_RecyclerView_HighlightedCountries);
 
@@ -54,38 +48,37 @@ public class MainActivity extends AppCompatActivity {
         mBigCountryA = new BigCountryCardAdapter(createList());
         mBigCountryRV.setAdapter(mBigCountryA);
 
-        setCollectionTitle(R.id.Home_Fragment_country_cardview, R.string.home_country_discover);
-        setCollectionTitle(R.id.Home_Fragment_events_cardview, R.string.home_events_around);
-
-
-
-        // set fragment's title
-/*        CardCollectionFragment countriesFragment = (CardCollectionFragment)
-                getSupportFragmentManager().
-                findFragmentById(R.id.Home_Fragment_country_cardview);
-        countriesFragment.setCollectionTitle(R.string.home_country_discover);
-
-        CardCollectionFragment eventsFragment = (CardCollectionFragment)
-                getSupportFragmentManager().
-                        findFragmentById(R.id.Home_Fragment_events_cardview);
-        eventsFragment.setCollectionTitle(R.string.home_events_around);*/
+        if(savedInstanceState==null){
+            initCardCollectionFragment(R.id.Home_Fragment_Container_country_cardview, R.string.home_country_discover);
+            initCardCollectionFragment(R.id.Home_Fragment_Container_events_cardview, R.string.home_events_around);
+        }
 
     }
 
-    private void setCollectionTitle(Integer fragment_id, Integer string_id) {
-        String collectionTitle = getString(string_id);
-        CardCollectionFragment fragment = new CardCollectionFragment();
+    private void initCardCollectionFragment(int fragment_container_id,
+                                            int fragment_title_id) {
+        // Check that the activity is using the layout version with
+        // the fragment_container FrameLayout
+        if (findViewById(fragment_container_id) != null) {
 
-        Bundle bundle = new Bundle();
-        bundle.putString("collectionTitle", collectionTitle );
+            // Create a new Fragment to be placed in the activity layout
+            CardCollectionFragment firstFragment = new CardCollectionFragment();
 
-        fragment.setArguments(bundle);
+            // In case this activity was started with special instructions from an
+            // Intent, pass the Intent's extras to the fragment as arguments
+            Bundle args = getIntent().getExtras();
+            if (args == null){
+                args = new Bundle();
+            }
+            args.putString("collectionTitle", getString(fragment_title_id));
+            firstFragment.setArguments(args);
 
-        android.support.v4.app.FragmentManager transaction = getSupportFragmentManager();
-        transaction.beginTransaction().
-            replace(fragment_id, fragment).
-            commit();
+            // Add the fragment to the 'fragment_container' FrameLayout
+            getSupportFragmentManager().beginTransaction()
+                    .add(fragment_container_id, firstFragment).commit();
+        }
     }
+
 
     @Override
     protected void attachBaseContext(Context newBase) {

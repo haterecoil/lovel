@@ -24,7 +24,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,24 +39,8 @@ import lorem.lovel.models.CardModel;
  */
 public class CardCollectionFragment extends Fragment {
 
-    private static final String TAG = "RecyclerViewFragment";
-    private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final String KEY_COLLECTION_TITLE = "collectionTitle";
-    private static final int SPAN_COUNT = 2;
     protected String mCollectionTitle;
-
-    public void setCollectionTitle(int collectionTitle) {
-        Log.w("== ll ll == ", "setCollectionTitle");
-        this.mCollectionTitle = getString(collectionTitle);
-        Log.w("== ll ll == ", this.mCollectionTitle);
-    }
-
-    private enum LayoutManagerType {
-        GRID_LAYOUT_MANAGER,
-        LINEAR_LAYOUT_MANAGER
-    }
-
-    protected LayoutManagerType mCurrentLayoutManagerType;
 
     protected RecyclerView mRecyclerView;
     protected CardCollectionAdapter mAdapter;
@@ -77,44 +60,53 @@ public class CardCollectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.cardcollection_fragment, container, false);
-        rootView.setTag(TAG);
 
         Bundle args = getArguments();
+
+
+
+
+
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.cardcollection_recyclerview);
+
+        setRecyclerViewLayoutManager();
+
+        mAdapter = new CardCollectionAdapter(mDataset);
+        // Set CustomAdapter as the adapter for RecyclerView.
+        mRecyclerView.setAdapter(mAdapter);
+
         TextView collectionTitleView = (TextView) rootView.findViewById(R.id.cardcollection_title);
 
-        if (args == null) {
-            Log.e("== ll ll ==", "is null :o");
-        } else {
+        if (args != null) {
             mCollectionTitle = this.getArguments().getString("collectionTitle");
             collectionTitleView.setText(mCollectionTitle);
         }
 
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.cardcollection_recyclerview);
+        if (mCollectionTitle != null){
+            if (collectionTitleView != null) {
+                collectionTitleView.setText(mCollectionTitle);
+            }
+        } else {
+            if (args != null) {
+                mCollectionTitle = this.getArguments().getString("collectionTitle");
+                collectionTitleView.setText(mCollectionTitle);
+            }
+        }
 
         // LinearLayoutManager is used here, this will layout the elements in a similar fashion
         // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
         // elements are laid out.
-        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView.setHorizontalScrollBarEnabled(false);
-
-        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+        //mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        //mRecyclerView.setHorizontalScrollBarEnabled(false);
 
         if (savedInstanceState != null) {
             // Restore saved layout manager type.
-            mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
-                    .getSerializable(KEY_LAYOUT_MANAGER);
-
-
             mCollectionTitle = (String) savedInstanceState
                     .getSerializable(KEY_COLLECTION_TITLE);
             collectionTitleView.setText(mCollectionTitle);
 
         }
-        setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new CardCollectionAdapter(mDataset);
-        // Set CustomAdapter as the adapter for RecyclerView.
-        mRecyclerView.setAdapter(mAdapter);
 
         return rootView;
     }
@@ -122,9 +114,8 @@ public class CardCollectionFragment extends Fragment {
     /**
      * Set RecyclerView's LayoutManager to the one given.
      *
-     * @param layoutManagerType Type of layout manager to switch to.
      */
-    public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
+    public void setRecyclerViewLayoutManager() {
         int scrollPosition = 0;
 
         // If a layout manager has already been set, get current scroll position.
@@ -134,7 +125,6 @@ public class CardCollectionFragment extends Fragment {
         }
 
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(scrollPosition);
@@ -143,7 +133,6 @@ public class CardCollectionFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save currently selected layout manager.
-        savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
         savedInstanceState.putSerializable(KEY_COLLECTION_TITLE, mCollectionTitle);
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -157,5 +146,19 @@ public class CardCollectionFragment extends Fragment {
         mDataset.add(new CardModel("France"));
         mDataset.add(new CardModel("Albanie"));
         mDataset.add(new CardModel("Roumanie", "Paris XIV"));
+    }
+
+    public void updateCollectionTitle(String string) {
+
+        Log.e("== ll ll ==", "updateCollectionTitle");
+        Log.e("== ll ll ==", string);
+        mCollectionTitle = string;
+        TextView collectionTitleView = (TextView) mRecyclerView.findViewById(R.id.cardcollection_title);
+        if (collectionTitleView!=null){
+            collectionTitleView.setText(string);
+            Log.e("== ll ll ==", "collectionTitleView is not nul");
+        } else {
+            Log.e("== ll ll ==", "collectionTitleView IS NULL");
+        }
     }
 }

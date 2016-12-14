@@ -43,20 +43,17 @@
                 >
             </android.support.v7.widget.RecyclerView>
 
-
-            <fragment android:name="lorem.lovel.fragments.CardCollectionFragment"
-                android:id="@+id/Home_Fragment_country_cardview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/Home_Fragment_Container_country_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_below="@id/Home_RecyclerView_HighlightedCountries"/>
 
-            <fragment android:name="lorem.lovel.fragments.CardCollectionFragment"
-                android:id="@+id/Home_Fragment_events_cardview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/Home_Fragment_country_cardview"/>
-
-
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/Home_Fragment_Container_events_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/Home_Fragment_Container_country_cardview"/>
             <!--
 
             <TextView

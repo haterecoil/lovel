@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "920810727064",
+    "firebase_url": "https://lovel-2f7aa.firebaseio.com",
+    "project_id": "lovel-2f7aa",
+    "storage_bucket": "lovel-2f7aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920810727064:android:aedade15748b062c",
+        "android_client_info": {
+          "package_name": "lorem.lovel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920810727064-pokslrh967i5nvrm07pe897bha8m1rbd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi-3SRUgFotgZaaywELnRrIEfivK-ymds"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920810727064-pokslrh967i5nvrm07pe897bha8m1rbd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
