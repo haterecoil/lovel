@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Lovel</string>
+    <string name="home_accueil">Accueil</string>
+    <string name="home_country_discover">Pays à découvrir</string>
+    <string name="home_events_around">Événements à proximité</string>
+    <string name="font_name_neue_haas">NeueHaasGrotDisp</string>
+    <string name="font_style_bold">bold</string>
+    <string name="font_style_medium">medium</string>
+    <string name="cardcollection_see_all">Tous ></string>
+</resources>

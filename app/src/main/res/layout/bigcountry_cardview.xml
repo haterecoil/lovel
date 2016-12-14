@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="327dp" android:layout_height="221dp"
+    android:id="@+id/bigcountry_cardview"
+    android:layout_margin="9dp">
+
+    <RelativeLayout android:layout_height="match_parent" android:layout_width="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bigcountry_name"
+            style="@style/H2"
+            />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
