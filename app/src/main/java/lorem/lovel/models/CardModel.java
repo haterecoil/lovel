@@ -4,6 +4,11 @@ import android.icu.text.DateFormat;
 import android.net.Uri;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 import lorem.lovel.CountryActivity;
 import lorem.lovel.EventActivity;
 
@@ -22,6 +27,13 @@ public class CardModel {
 
     public final static int TYPE_EVENT = 0;
     public final static int TYPE_COUNTRY = 1;
+
+    private String EVENT_PRE = "file:///android_asset/img/event_";
+    private String EVENT_SUF = ".png";
+    public String getName() {
+        return name;
+    }
+
     public final static Class TYPE_EVENT_CLASS = EventActivity.class;
     public final static Class TYPE_COUNTRY_CLASS = CountryActivity.class;
 
@@ -67,7 +79,8 @@ public class CardModel {
 
     public Uri getIllustrationPath(Boolean thumbnail) {
         if (cardType != TYPE_COUNTRY) {
-            return Uri.parse("file:///illus/progress_image.png");
+            Random ran = new Random();
+            return Uri.parse(EVENT_PRE+ String.valueOf(ran.nextInt(5))+EVENT_SUF);
         }
 
         if (thumbnail) {return Uri.parse("file:///android_asset/illus/159_196/"+name.toLowerCase()+".png");}

@@ -15,6 +15,9 @@
     <item name="darkorange" type="color">#FFFF8800</item>
     <item name="darkred" type="color">#FFCC0000</item>
     <item name="lightgray" type="color">#CCD6D6D6</item>
+    <item name="bgGray" type="color">#fff2f5f8</item>
+    <item name="bgLight" type="color">#fffcfeff</item>
+    <item name="icOrange" type="color">#ffff3c00</item>
 
     <integer-array name="androidcolors">
         <item>@color/blue</item>
@@ -28,6 +31,9 @@
         <item>@color/darkorange</item>
         <item>@color/darkred</item>
         <item>@color/lightgray</item>
+        <item>@color/bgGray</item>
+        <item>@color/bgLight</item>
+        <item>@color/icOrange</item>
     </integer-array>
 
 </resources>

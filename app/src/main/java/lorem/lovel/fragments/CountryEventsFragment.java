@@ -58,7 +58,7 @@ public class CountryEventsFragment extends Fragment {
             // Intent, pass the Intent's extras to the fragment as arguments
             Bundle args = new Bundle();
             args.putString("collectionTitle",fragment_title);
-            args.putString("cardType", String.valueOf(CardModel.TYPE_EVENT));
+            args.putInt("cardType", CardModel.TYPE_EVENT);
             firstFragment.setArguments(args);
 
             // Add the fragment to the 'fragment_container' FrameLayout

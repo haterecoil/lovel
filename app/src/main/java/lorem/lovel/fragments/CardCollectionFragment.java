@@ -185,10 +185,10 @@ public class CardCollectionFragment extends Fragment {
                     setName("Angleterre"));
             mDataset.add(new CardModel().
                     setCardType(CardModel.TYPE_COUNTRY).
-                    setName("Italie"));
+                    setName("Canada"));
             mDataset.add(new CardModel().
                     setCardType(CardModel.TYPE_COUNTRY).
-                    setName("Russie"));
+                    setName("Irlande"));
 
         }
     }

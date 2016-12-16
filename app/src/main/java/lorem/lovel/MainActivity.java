@@ -32,13 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/gt-walsheim-regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
-
-
         mBigCountryRV = (RecyclerView) findViewById(R.id.Home_RecyclerView_HighlightedCountries);
 
         mBigCountryLM = new LinearLayoutManager(this);

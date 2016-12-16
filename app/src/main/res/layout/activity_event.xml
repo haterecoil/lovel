@@ -42,6 +42,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:layout_gravity="fill_vertical"
+        android:background="@color/bgGray"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -52,33 +53,76 @@
             <TextView android:id="@+id/event_detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This is a title – yo"/>
+                style="@style/FontActivityTitle"
+                android:layout_marginTop="26dp"
+                android:text="Catch girls at O'Sullivan's \n – Paris XIV"/>
             <TextView android:id="@+id/event_detail_h_info"
                 android:layout_width="match_parent"
                 android:layout_height="18dp"
                 android:layout_marginTop="21dp"
                 android:layout_marginBottom="18dp"
+                style="@style/FontSubtitle"
                 android:text="Infos"
                 android:layout_below="@id/event_detail_title"
                 />
-            <FrameLayout android:id="@+id/event_detail_citymapper"
-                android:layout_width="match_parent"
+            <RelativeLayout android:id="@+id/event_detail_citymapper"
+                android:layout_width="327dp"
                 android:layout_height="112dp"
                 android:layout_below="@id/event_detail_h_info">
+                <RelativeLayout android:id="@+id/event_detail_citymapperRL1"
+                    android:layout_width="215dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/bgLight">
+                    <TextView android:id="@+id/citymapper_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginTop="12dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="O'Sullivans"
+                        style="@style/FontCardLabelBig"/>
+                    <TextView android:id="@+id/citymapper_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_below="@id/citymapper_name"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="10 Rue des Lombards \n 75004 Paris"
+                        style="@style/FontCardLabelRegular"/>
+                    <ImageView
+                        android:id="@+id/citymapper_img_metro"
+                        android:layout_width="48dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/ic_citymapper_metro"
+                        android:layout_below="@id/citymapper_address"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="112dp"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/event_detail_citymapperRL1"
+                    android:background="#3caa35">
+                    <ImageView
+                        android:id="@+id/citymapper_img_logo"
+                        android:layout_width="112dp"
+                        android:layout_height="112dp"/>
+                </RelativeLayout>
 
-            </FrameLayout>
+            </RelativeLayout>
             <TextView android:id="@+id/event_detail_h_about"
                 android:layout_width="match_parent"
                 android:layout_height="18dp"
                 android:layout_marginTop="21dp"
                 android:layout_marginBottom="14dp"
                 android:text="A propos"
+                style="@style/FontSubtitle"
                 android:layout_below="@id/event_detail_citymapper"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/event_detail_h_about"
+                style="@style/FontText"
                 android:text="LoremIpsum is a basic Lorem Ipsum text generator for Android. It has three buttons which allow you to select a text length, which copies the text to the clipboard and promptly exits the app.
 
 If you find this app useful, or have some suggestions for improvements, contact me at: nikreiman@shortmail.com

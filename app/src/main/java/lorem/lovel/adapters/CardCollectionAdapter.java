@@ -59,6 +59,7 @@ public class CardCollectionAdapter
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), cm.getTargetClass());
+                intent.putExtra("countryName", cm.getName());
                 context.startActivity(intent);
             }
         });

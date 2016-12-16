@@ -1,6 +1,7 @@
 package lorem.lovel.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,7 @@ public class BigCountryCardAdapter extends RecyclerView.Adapter<BigCountryCardAd
 
     @Override
     public void onBindViewHolder(CountryCardViewHolder holder, int position) {
-        CardModel cm = countryList.get(position);
+        final CardModel cm = countryList.get(position);
         holder.vName.setText(cm.getText());
 
         Glide.with(context)
@@ -49,6 +50,14 @@ public class BigCountryCardAdapter extends RecyclerView.Adapter<BigCountryCardAd
                 .placeholder(R.drawable.progress_animation)
                 .centerCrop()
                 .into(holder.vImage);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), cm.getTargetClass());
+                intent.putExtra("countryName", cm.getName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

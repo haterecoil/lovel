@@ -2,18 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content">
-    <TextView android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+    <TextView android:layout_height="60dp"
+        android:layout_width="match_parent"
         android:id="@+id/tab_icon"
-        android:text="200"
+        android:text="42"
+        android:gravity="center"
+        style="@style/FontTextDataBig"
         xmlns:android="http://schemas.android.com/apk/res/android" />
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
         android:id="@+id/tab_label"
         android:layout_below="@id/tab_icon"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/tab_label"
-        android:fontFamily="@string/font_style_medium"/>
+        android:gravity="center"
+        style="@style/FontMenuText"/>
 </RelativeLayout>
 
