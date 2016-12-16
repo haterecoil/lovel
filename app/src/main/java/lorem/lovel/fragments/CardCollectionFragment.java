@@ -47,9 +47,24 @@ public class CardCollectionFragment extends Fragment {
     protected RecyclerView.LayoutManager mLayoutManager;
     protected List<CardModel> mDataset;
 
+    protected int cardType;
+
+    public CardCollectionFragment() {
+        cardType = CardModel.TYPE_COUNTRY;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int pCardType = getArguments().getInt("cardType", 0);
+
+        switch(pCardType) {
+            case CardModel.TYPE_EVENT: cardType = CardModel.TYPE_EVENT;
+                break;
+            case CardModel.TYPE_COUNTRY: cardType = CardModel.TYPE_COUNTRY;
+                break;
+            default: cardType = CardModel.TYPE_COUNTRY;
+        }
 
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.
@@ -63,15 +78,11 @@ public class CardCollectionFragment extends Fragment {
 
         Bundle args = getArguments();
 
-
-
-
-
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.cardcollection_recyclerview);
 
         setRecyclerViewLayoutManager();
 
-        mAdapter = new CardCollectionAdapter(mDataset);
+        mAdapter = new CardCollectionAdapter(mDataset, this.getContext());
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
 
@@ -80,6 +91,15 @@ public class CardCollectionFragment extends Fragment {
         if (args != null) {
             mCollectionTitle = this.getArguments().getString("collectionTitle");
             collectionTitleView.setText(mCollectionTitle);
+            int pCardType = args.getInt("cardType", 0);
+
+            switch(pCardType) {
+                case CardModel.TYPE_EVENT: cardType = CardModel.TYPE_EVENT;
+                    break;
+                case CardModel.TYPE_COUNTRY: cardType = CardModel.TYPE_COUNTRY;
+                    break;
+                default: cardType = CardModel.TYPE_COUNTRY;
+            }
         }
 
         if (mCollectionTitle != null){
@@ -143,9 +163,34 @@ public class CardCollectionFragment extends Fragment {
      */
     private void initDataset() {
         mDataset = new ArrayList<>();
-        mDataset.add(new CardModel("France"));
-        mDataset.add(new CardModel("Albanie"));
-        mDataset.add(new CardModel("Roumanie", "Paris XIV"));
+        if (cardType == CardModel.TYPE_EVENT){
+            mDataset.add(new CardModel().
+                    setCardType(CardModel.TYPE_EVENT).
+                    setName("Concert de cornemuse").
+                    setDate("Vendredi 16 Dec.").
+                    setPlace("HETIC, Montreuil"));
+            mDataset.add(new CardModel().
+                    setCardType(CardModel.TYPE_EVENT).
+                    setName("Dégustation de bières insipides.").
+                    setDate("Vendredi 16 Dec.").
+                    setPlace("Birdies, Montreuil"));
+            mDataset.add(new CardModel().
+                    setCardType(CardModel.TYPE_EVENT).
+                    setName("Découverte des massages thailandais").
+                    setDate("Vendredi 16 Dec.").
+                    setPlace("Montreuil"));
+        } else {
+            mDataset.add(new CardModel().
+                    setCardType(CardModel.TYPE_COUNTRY).
+                    setName("Angleterre"));
+            mDataset.add(new CardModel().
+                    setCardType(CardModel.TYPE_COUNTRY).
+                    setName("Italie"));
+            mDataset.add(new CardModel().
+                    setCardType(CardModel.TYPE_COUNTRY).
+                    setName("Russie"));
+
+        }
     }
 
     public void updateCollectionTitle(String string) {

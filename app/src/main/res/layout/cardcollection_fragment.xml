@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardcollection_RL"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_gravity="bottom"
+    android:scrollbars="none"
+    android:layout_weight="2">
 
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cardcollection_title"
-        style="@style/Strong"/>
+        style="@style/FontCardCollectionLabel"/>
 
     <TextView android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:text="@string/cardcollection_see_all"
         android:id="@+id/cardcollection_button"
         android:layout_alignParentEnd="true"
-        style="@style/Regular"/>
+        android:layout_marginEnd="24dp"
+        style="@style/FontCardCollectionLabel"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:scrollbars="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.5dp"
+        android:scrollbars="none"
         android:id="@+id/cardcollection_recyclerview"
         android:layout_below="@id/cardcollection_title"/>
 </RelativeLayout>

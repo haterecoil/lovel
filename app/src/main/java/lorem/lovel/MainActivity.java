@@ -14,6 +14,7 @@ import java.util.List;
 
 import lorem.lovel.adapters.BigCountryCardAdapter;
 import lorem.lovel.fragments.CardCollectionFragment;
+import lorem.lovel.models.CardModel;
 import lorem.lovel.models.CountryModel;
 import lorem.lovel.models.EventModel;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/NeueHaasGrotDisp-Roman.ttf")
+                .setDefaultFontPath("fonts/gt-walsheim-regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
@@ -45,18 +46,23 @@ public class MainActivity extends AppCompatActivity {
         mBigCountryRV.setLayoutManager(mBigCountryLM);
         mBigCountryRV.setHorizontalScrollBarEnabled(false);
 
-        mBigCountryA = new BigCountryCardAdapter(createList());
+        mBigCountryA = new BigCountryCardAdapter(createList(), this);
         mBigCountryRV.setAdapter(mBigCountryA);
 
         if(savedInstanceState==null){
-            initCardCollectionFragment(R.id.Home_Fragment_Container_country_cardview, R.string.home_country_discover);
-            initCardCollectionFragment(R.id.Home_Fragment_Container_events_cardview, R.string.home_events_around);
+            initCardCollectionFragment(R.id.Home_Fragment_Container_country_cardview,
+                    R.string.home_country_discover,
+                    CardModel.TYPE_COUNTRY);
+            initCardCollectionFragment(R.id.Home_Fragment_Container_events_cardview,
+                    R.string.home_events_around,
+                    CardModel.TYPE_EVENT);
         }
 
     }
 
     private void initCardCollectionFragment(int fragment_container_id,
-                                            int fragment_title_id) {
+                                            int fragment_title_id,
+                                            int cardType) {
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
         if (findViewById(fragment_container_id) != null) {
@@ -71,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 args = new Bundle();
             }
             args.putString("collectionTitle", getString(fragment_title_id));
+            args.putInt("cardType", cardType);
             firstFragment.setArguments(args);
 
             // Add the fragment to the 'fragment_container' FrameLayout
@@ -95,13 +102,17 @@ public class MainActivity extends AppCompatActivity {
         return eventList;
     }
 
-    private List<CountryModel> createList() {
-        List<CountryModel> countryList = new ArrayList<>();
-        countryList.add(new CountryModel("France"));
-        countryList.add(new CountryModel("Allemagne"));
-        countryList.add(new CountryModel("Belgique"));
-        countryList.add(new CountryModel("Portugal"));
-        countryList.add(new CountryModel("Roumanie"));
+    private List<CardModel> createList() {
+        List<CardModel> countryList = new ArrayList<>();
+        countryList.add(new CardModel()
+                .setName("Hongrie")
+                .setCardType(CardModel.TYPE_COUNTRY));
+        countryList.add(new CardModel()
+                .setName("Suisse")
+                .setCardType(CardModel.TYPE_COUNTRY));
+        countryList.add(new CardModel()
+                .setName("Italie")
+                .setCardType(CardModel.TYPE_COUNTRY));
 
         return countryList;
     }

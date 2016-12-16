@@ -1,15 +1,19 @@
 package lorem.lovel.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import lorem.lovel.R;
-import lorem.lovel.models.CountryModel;
+import lorem.lovel.models.CardModel;
 
 /**
  * Created by mrgn on 13/12/2016.
@@ -18,10 +22,12 @@ import lorem.lovel.models.CountryModel;
 
 public class BigCountryCardAdapter extends RecyclerView.Adapter<BigCountryCardAdapter.CountryCardViewHolder> {
 
-    private List<CountryModel> countryList;
+    private List<CardModel> countryList;
+    private Context context;
 
-    public BigCountryCardAdapter(List<CountryModel> countryList) {
+    public BigCountryCardAdapter(List<CardModel> countryList, Context pContext) {
         this.countryList = countryList;
+        context = pContext;
     }
 
     @Override
@@ -35,8 +41,14 @@ public class BigCountryCardAdapter extends RecyclerView.Adapter<BigCountryCardAd
 
     @Override
     public void onBindViewHolder(CountryCardViewHolder holder, int position) {
-        CountryModel cm = countryList.get(position);
-        holder.vName.setText(cm.name);
+        CardModel cm = countryList.get(position);
+        holder.vName.setText(cm.getText());
+
+        Glide.with(context)
+                .load(cm.getIllustrationPath(true))
+                .placeholder(R.drawable.progress_animation)
+                .centerCrop()
+                .into(holder.vImage);
     }
 
     @Override
@@ -46,10 +58,12 @@ public class BigCountryCardAdapter extends RecyclerView.Adapter<BigCountryCardAd
 
     public static class CountryCardViewHolder extends RecyclerView.ViewHolder {
         protected TextView vName;
+        protected ImageView vImage;
 
         public CountryCardViewHolder(View v){
             super(v);
             vName = (TextView) v.findViewById(R.id.bigcountry_name);
+            vImage = (ImageView) v.findViewById(R.id.bigcountry_image);
         }
     }
 }

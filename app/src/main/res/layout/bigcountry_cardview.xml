@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="327dp" android:layout_height="221dp"
+    android:layout_width="327dp"
+    android:layout_height="240dp"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bigcountry_cardview"
-    android:layout_margin="9dp">
+    card_view:cardBackgroundColor="@android:color/transparent"
+    card_view:cardElevation="0dp"
+    android:layout_marginBottom="25dp"
+    android:scrollbars="none"
+    android:layout_marginEnd="9dp">
 
-    <RelativeLayout android:layout_height="match_parent" android:layout_width="match_parent">
+    <RelativeLayout 
+        android:layout_height="match_parent" 
+        android:layout_width="match_parent">
+        <!--android:id="@+id/bigcountry_image"-->
+        <ImageView android:id="@+id/bigcountry_image"
+            android:layout_width="match_parent"
+            android:layout_height="196dp"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="none" />
+        <!--android:layout_below="@id/bigcountry_image"-->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bigcountry_name"
-            style="@style/H2"
+            android:layout_below="@id/bigcountry_image"
+            style="@style/FontCardLabelBig"
             />
     </RelativeLayout>
 
