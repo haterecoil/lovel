@@ -80,7 +80,7 @@ public class CardModel {
     public Uri getIllustrationPath(Boolean thumbnail) {
         if (cardType != TYPE_COUNTRY) {
             Random ran = new Random();
-            return Uri.parse(EVENT_PRE+ String.valueOf(ran.nextInt(5))+EVENT_SUF);
+            return Uri.parse(EVENT_PRE+ String.valueOf(ran.nextInt(4)+1)+EVENT_SUF);
         }
 
         if (thumbnail) {return Uri.parse("file:///android_asset/illus/159_196/"+name.toLowerCase()+".png");}

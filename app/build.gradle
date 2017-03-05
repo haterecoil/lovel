@@ -17,6 +17,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    /*
+
+    Use packagingOptions in order to fix com.android.builder.packaging.DuplicateFileException
+
+    Error:Execution failed for task ':app:transformResourcesWithMergeJavaResForDebug'.
+    > com.android.build.api.transform.TransformException: com.android.builder.packaging.DuplicateFileException: Duplicate files copied in APK META-INF/LICENSE
+        File1: /.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.8.5/9d82ff47bc2c2d3b5b6a6618fe636782bbcd5b07/jackson-annotations-2.8.5.jar
+        File2: ~/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.8.5/60d059f5d2930ccd1ef03535b713fd9f933d1ba7/jackson-core-2.8.5.jar
+        File3: ~/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.8.5/b3035f37e674c04dafe36a660c3815cc59f764e2/jackson-databind-2.8.5.jar
+
+     */
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
 }
 
 dependencies {
@@ -34,6 +51,9 @@ dependencies {
     compile 'com.google.firebase:firebase-database:9.2.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-v4:25.1.0'
+
+    compile 'com.google.android.gms:play-services:10.0.1'
+
     //Network (Volley + Jackson)
 
     compile 'com.android.volley:volley:1.0.0'

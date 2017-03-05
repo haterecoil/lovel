@@ -9,12 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import lorem.lovel.App;
 import lorem.lovel.R;
 import lorem.lovel.models.CardModel;
+import lorem.lovel.models.CountryModel;
 
 /**
  * Created by mrgn on 13/12/2016.
@@ -26,10 +31,39 @@ public class BigCountryCardAdapter extends RecyclerView.Adapter<BigCountryCardAd
     private List<CardModel> countryList;
     private Context context;
 
+    public static class CountryCardViewHolder extends RecyclerView.ViewHolder {
+        protected TextView vName;
+        protected ImageView vImage;
+
+        public CountryCardViewHolder(View v) {
+            super(v);
+            vName = (TextView) v.findViewById(R.id.bigcountry_name);
+            vImage = (ImageView) v.findViewById(R.id.bigcountry_image);
+
+        }
+    }
+
     public BigCountryCardAdapter(List<CardModel> countryList, Context pContext) {
         this.countryList = countryList;
         context = pContext;
     }
+
+    public void refresh(CardModel[] cards) {
+        if(cards==null) {
+            refresh(new ArrayList<CardModel>());
+        } else {
+            refresh(Arrays.asList(cards));
+        }
+    }
+
+    public void refresh(List<CardModel> cardsList) {
+        this.countryList.clear();
+        this.countryList.addAll(cardsList);
+
+        //Refresh UI
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public CountryCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -61,18 +95,16 @@ public class BigCountryCardAdapter extends RecyclerView.Adapter<BigCountryCardAd
     }
 
     @Override
-    public int getItemCount() {
-        return this.countryList.size();
+    public long getItemId(int i) {
+        return 0;
     }
 
-    public static class CountryCardViewHolder extends RecyclerView.ViewHolder {
-        protected TextView vName;
-        protected ImageView vImage;
+    @Override
+    public int getItemCount() {return countryList.size();}
 
-        public CountryCardViewHolder(View v){
-            super(v);
-            vName = (TextView) v.findViewById(R.id.bigcountry_name);
-            vImage = (ImageView) v.findViewById(R.id.bigcountry_image);
-        }
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
+
 }

@@ -1,11 +1,16 @@
 package lorem.lovel.network;
 
+import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.SimpleType;
 import com.spothero.volley.JacksonRequest;
 import com.spothero.volley.JacksonRequestListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import lorem.lovel.App;
 import lorem.lovel.models.BigCountryResult;
@@ -16,7 +21,7 @@ public class BigCountryService {
     private static final String COUNTRY_REQUEST_TAG = "big_country_request";
 
     public interface BigCountryListener {
-        void onReceive(CardModel[] countries);
+        void onReceive(BigCountryResult countries);
         void onFailed();
     }
 
@@ -31,7 +36,7 @@ public class BigCountryService {
 
     }
 
-    public static void getBeers(String name, BigCountryListener  listener) {
+    public static void getBigCountries(String name, BigCountryListener  listener) {
 
         String url = UrlBuilder.getCountriesUrl(name);
 
@@ -63,7 +68,8 @@ public class BigCountryService {
                         //response !!!
 
                         if(response!=null) {
-                            CardModel[] bigCountries = response.getData();
+                            Log.e("== ll ==", "Repsonse is not null");
+                            BigCountryResult bigCountries = response;
 
                             if(listener!=null) {
                                 listener.onReceive (bigCountries);
@@ -71,6 +77,7 @@ public class BigCountryService {
                         }
 
                         if(error!=null) {
+                            Log.e("== ll ==", "Repsonse is null");
                             if(listener!=null) {
                                 listener.onFailed();
                             }

@@ -1,9 +1,8 @@
 package lorem.lovel.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lorem.lovel.models.CardModel;
+import java.util.List;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,7 +11,7 @@ public class BigCountryResult {
     private int numberOfPages;
     private int totalResults;
 
-    private CardModel[] data;
+    private List<CardModel> apps;
 
     public int getCurrentPage() {
         return currentPage;
@@ -38,11 +37,11 @@ public class BigCountryResult {
         this.totalResults = totalResults;
     }
 
-    public CardModel[] getData() {
-        return data;
+    public List<CardModel> getData() {
+        return apps;
     }
 
-    public void setData(CardModel[] data) {
-        this.data = data;
+    public void setData(List<CardModel> apps) {
+        this.apps = apps;
     }
 }
